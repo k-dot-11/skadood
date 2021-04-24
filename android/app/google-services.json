@@ -14,8 +14,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "345176715251-pebj69q0tjkcm1a9f1etsbkgvdb0kvnn.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "877741552696-53pmnos32bom3p01rscbf1gaijejqo4a.apps.googleusercontent.com",
+          "client_type": 3,
+          "android_info": {
+            "package_name": "com.skadood",
+            "certificate_hash": "8d3333ffd626ae9aa4312bd76349438e40253e35"
+          }
         }
       ],
       "api_key": [
@@ -27,7 +31,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "345176715251-pebj69q0tjkcm1a9f1etsbkgvdb0kvnn.apps.googleusercontent.com",
+              "client_id": "877741552696-53pmnos32bom3p01rscbf1gaijejqo4a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
