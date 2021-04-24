@@ -1,11 +1,30 @@
 import React from 'react';
-import { View, Text, ActivityIndicator, Button } from 'react-native';
+import { View, Text, ActivityIndicator, Button, Linking } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import { useEffect , useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const AuthPage = () => {
 	const [ initializing, setInitializing ] = useState(true);
 	const [ user, setUser ] = useState();
+	const setToken = () => {
+		fetch('https://ancient-wave-59600.herokuapp.com/create-user', {
+			method: 'POST',
+			mode: 'cors',
+			cache: 'no-cache',
+			credentials: 'same-origin',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			redirect: 'follow',
+			referrerPolicy: 'no-referrer'
+		})
+			.then((res) => {
+				return res.json();
+			})
+			.then((result) => {
+				Linking.openURL(result.url);
+			});
+	};
 	function onAuthStateChanged(user) {
 		setUser(user);
 		if (initializing) setInitializing(false);
@@ -16,7 +35,7 @@ const AuthPage = () => {
 	}, []);
 
 	const createAccount = () => {
-        console.log('reoses')
+		console.log('reoses');
 		auth()
 			.createUserWithEmailAndPassword('jane.doe@example.com', 'SuperSecretPassword!')
 			.then(() => {
@@ -39,8 +58,9 @@ const AuthPage = () => {
 
 	return (
 		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>{user ? user.email : 'Not signed in'}</Text>
+			<Text>{user ? user.email : 'Not signed in'}</Text>
 			<Button title="Create Account" onPress={createAccount} />
+			<Button title="Test backend" onPress={setToken} />
 		</View>
 	);
 };
