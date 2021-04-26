@@ -70,17 +70,25 @@ const DoctorListScreen = ({ navigation }) => {
 		}
 	});
 
+	const logout = () => {
+		auth().signOut().then(() => {
+			console.log('Signed Out !');
+			navigation.replace('Splash');
+		});
+	};
+
 	return (
-		<ScrollView style={{ backgroundColor: '#d4e9fd' }}>
+		<View style={{ backgroundColor: '#d4e9fd', flex: 1 }}>
 			<View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
 				<View style={{ display: 'flex', alignItems: 'center' }}>
 					<Text category="h3"> Doctors Available</Text>
 					<Text appearance="hint"> 15 Available today</Text>
 				</View>
+				<Button onPress={logout}>Log out</Button>
 			</View>
 
 			<FlatList data={doctors} renderItem={renderItems} />
-		</ScrollView>
+		</View>
 	);
 };
 

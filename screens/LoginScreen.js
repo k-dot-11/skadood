@@ -24,7 +24,7 @@ const LoginScreen = ({ navigation }, props) => {
 				onAuthStateChanged(authUser);
 				console.log(authUser);
 				if (authUser) {
-					navigation.replace('Doctor');
+					navigation.replace('Doctor Screen');
 				}
 			});
 			return unsubscribe;
