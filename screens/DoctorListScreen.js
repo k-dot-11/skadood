@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Avatar, Card, Text, Layout, Icon } from '@ui-kitten/components';
+import { Avatar, Card, Text, Layout} from '@ui-kitten/components';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const doctors = [
 	{ id: 1, name: 'Dr. John', degree: 'MBBS ' },
@@ -58,10 +59,7 @@ const DoctorListScreen = ({ navigation }) => {
 							</View>
 						</View>
 						<View style={{ marginTop: 20 }}>
-							<Text
-								style={{ color: 'blue', textAlign: 'left', marginRight: 20 }}
-								category="h1"
-							>{`>`}</Text>
+							<Icon name="rocket" size={30} color="#900" />
 						</View>
 					</View>
 				</Card>
