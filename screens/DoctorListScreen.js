@@ -1,7 +1,9 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Avatar, Card, Text, Layout} from '@ui-kitten/components';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Button, Avatar, Card, Text, Layout } from '@ui-kitten/components';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import auth from '@react-native-firebase/auth';
+import { useState } from 'react';
 
 const doctors = [
 	{ id: 1, name: 'Dr. John', degree: 'MBBS ' },
@@ -16,19 +18,36 @@ const doctors = [
 ];
 
 const DoctorListScreen = ({ navigation }) => {
+	const [ currEmail, setCurrentEmail ] = useState('');
+
+	const testAuth = () => {
+		console.log(currEmail);
+	};
+
+	auth().onAuthStateChanged((user) => {
+		if (user) {
+			if (user.isAnonymous) {
+				setCurrentEmail('Anonymous');
+				setIsAnon(true);
+			} else setCurrentEmail(user.email);
+		}
+	});
+
 	return (
 		<ScrollView style={{ backgroundColor: '#d4e9fd' }}>
-			<View style={{ flexDirection: 'row' }}>
+			<View style={{ display: 'flex', flexDirection: 'row' , justifyContent:'space-around'}}>
 				<View>
 					<Text category="h3"> Doctors Available</Text>
 					<Text appearance="hint"> 15 Available today</Text>
 				</View>
+				<Button size='tiny' style={{margin:5}} onPress={testAuth}>Test authState</Button>
 			</View>
+
+			{/* TODO : make a flatlist instead of the map function for optimisation */}
 
 			{doctors.map((doctor) => (
 				<Card
 					onPress={() => {
-						/* 1. Navigate to the Details route with params */
 						navigation.navigate('Slot Screen', {
 							id: doctor.id,
 							name: doctor.name,
@@ -59,7 +78,7 @@ const DoctorListScreen = ({ navigation }) => {
 							</View>
 						</View>
 						<View style={{ marginTop: 20 }}>
-							<Icon name="rocket" size={30} color="#900" />
+							<Icon name="medical-services" size={30} color="#900" />
 						</View>
 					</View>
 				</Card>

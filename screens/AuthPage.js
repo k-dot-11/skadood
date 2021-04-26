@@ -6,7 +6,7 @@ import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-si
 import { Layout, Text, Button, Input, Card, RadioGroup, Radio } from '@ui-kitten/components';
 import firestore from '@react-native-firebase/firestore';
 
-const AuthPage = () => {
+const AuthPage = (props) => {
 	const [ initializing, setInitializing ] = useState(true);
 	const [ user, setUser ] = useState();
 	const [ email, setEmail ] = useState('');
@@ -14,15 +14,15 @@ const AuthPage = () => {
 	const [ password, setPassword ] = useState('');
 	const [ selectedIndex, setSelectedIndex ] = useState(0);
 
-	function onAuthStateChanged(user) {
-		setUser(user);
-		if (initializing) setInitializing(false);
-	}
-
 	useEffect(() => {
 		const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
 		return subscriber;
 	}, []);
+
+	function onAuthStateChanged(user) {
+		setUser(user);
+		if (initializing) setInitializing(false);
+	}
 
 	const createAccount = () => {
 		console.log('reoses');
@@ -41,6 +41,7 @@ const AuthPage = () => {
 					})
 					.then(() => {
 						console.log('User added!');
+						selectedIndex === 0 && props.navigation.navigate('Doctor Screen');
 					});
 			})
 			.catch((error) => {
@@ -74,8 +75,8 @@ const AuthPage = () => {
 				Linking.openURL(result.url);
 			});
 	};
-	const handlePress = () => {
-		createAccount();
+	const navigateToLogin = () => {
+		props.navigation.navigate('Login');
 	};
 
 	if (initializing) return <ActivityIndicator />;
@@ -120,7 +121,10 @@ const AuthPage = () => {
 					<Radio>Doctor</Radio>
 				</RadioGroup>
 			</Layout>
-			<Button onPress={handlePress}>Create Account</Button>
+			<Button onPress={createAccount}>Create Account</Button>
+			<Button style={{ marginTop: 10 }} onPress={navigateToLogin}>
+				Log In
+			</Button>
 		</Layout>
 	);
 };

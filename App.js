@@ -14,10 +14,10 @@ function App() {
 		<ApplicationProvider {...eva} theme={eva.light}>
 			<NavigationContainer>
 				<Stack.Navigator>
+					<Stack.Screen name="Login" component={LoginScreen} />
+					<Stack.Screen name="Sign Up" component={AuthPage} />
 					<Stack.Screen name="Doctor Screen" component={DoctorListScreen} />
 					<Stack.Screen name="Slot Screen" component={SlotBookingScreen} />
-					<Stack.Screen name="Login" component={LoginScreen} />
-					<Stack.Screen name="Home" component={AuthPage} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</ApplicationProvider>
