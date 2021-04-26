@@ -24,6 +24,10 @@ const AuthPage = (props) => {
 		if (initializing) setInitializing(false);
 	}
 
+	const logOut = () => {
+		auth().signOut();
+	};
+
 	const createAccount = () => {
 		console.log('reoses');
 		auth()
@@ -122,6 +126,7 @@ const AuthPage = (props) => {
 				</RadioGroup>
 			</Layout>
 			<Button onPress={createAccount}>Create Account</Button>
+			<Button onPress={logOut}>Log out</Button>
 			<Button style={{ marginTop: 10 }} onPress={navigateToLogin}>
 				Log In
 			</Button>
