@@ -1,14 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const NewScreen = () => {
+const Backend = () => {
     return (
         <View>
-            <Text>fsafsagsag</Text>
+            <Text>fsafsaffsa</Text>
         </View>
     )
 }
 
-export default NewScreen
+export default Backend
 
 const styles = StyleSheet.create({})
