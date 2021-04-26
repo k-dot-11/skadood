@@ -20,17 +20,30 @@ const LoginScreen = ({ navigation }, props) => {
 
 	useEffect(
 		() => {
-			const unsubscribe = onAuthStateChanged((authUser) => {
+			const unsubscribe = auth().onAuthStateChanged((authUser) => {
+				onAuthStateChanged(authUser);
 				console.log(authUser);
-
 				if (authUser) {
-					navigation.replace('Sign Up');
+					navigation.replace('Doctor');
 				}
 			});
 			return unsubscribe;
 		},
 		[ user ]
 	);
+	// useEffect(
+	// 	() => {
+	// 		const unsubscribe = onAuthStateChanged((authUser) => {
+	// 			console.log(authUser);
+
+	// 			if (authUser) {
+	// 				navigation.replace('Doctor');
+	// 			}
+	// 		});
+	// 		return unsubscribe;
+	// 	},
+	// 	[ user ]
+	// );
 
 	const signIn = () => {
 		auth()
