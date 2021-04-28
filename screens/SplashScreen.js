@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
-import { Button, Text } from '@ui-kitten/components';
+import { Button, Layout, Text } from '@ui-kitten/components';
 import auth from '@react-native-firebase/auth';
 
 const SplashScreen = ({ navigation }) => {
@@ -38,13 +38,13 @@ const SplashScreen = ({ navigation }) => {
 			source={{ uri: 'https://wallpaperaccess.com/full/1964825.jpg' }}
 			style={{ height: '100%', width: '100%' }}
 		>
-			<View style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', flex: 1 }}>
+			<Layout style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', flex: 1 }}>
 				<Text category="h1" style={{ marginTop: 150 }}>
 					Welcome to SKADOOD!
 				</Text>
 
 				{loading ? <Text>Loading</Text> : <Button style={{ marginTop: 50 }} onPress={navigateToSignUp}>Get Started</Button>}
-			</View>
+			</Layout>
 		</ImageBackground>
 	);
 };

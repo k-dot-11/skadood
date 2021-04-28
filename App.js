@@ -12,14 +12,29 @@ const Stack = createStackNavigator();
 
 function App() {
 	return (
-		<ApplicationProvider {...eva} theme={eva.light}>
+		<ApplicationProvider {...eva} theme={eva.dark}>
 			<NavigationContainer>
 				<Stack.Navigator>
-				<Stack.Screen name="Splash" options={{title:" ",headerTransparent: true}} component={SplashScreen} />
+					<Stack.Screen
+						name="Splash"
+						options={{ title: ' ', headerTransparent: true }}
+						component={SplashScreen}
+					/>
 					<Stack.Screen name="Login" component={LoginScreen} />
-					
+
 					<Stack.Screen name="Sign Up" component={AuthPage} />
-					<Stack.Screen name="Doctor Screen" options={{title:" ",headerTransparent: true}} component={DoctorListScreen} />
+					<Stack.Screen
+						name="Doctor Screen"
+						component={DoctorListScreen}
+						options={{
+							title: '',
+							headerStyle: {
+								backgroundColor: '#222831'
+							},
+							headerTintColor: '#fff',
+							
+						}}
+					/>
 					<Stack.Screen name="Slot Screen" component={SlotBookingScreen} />
 				</Stack.Navigator>
 			</NavigationContainer>
