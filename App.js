@@ -35,7 +35,14 @@ function App() {
 							
 						}}
 					/>
-					<Stack.Screen name="Slot Screen" component={SlotBookingScreen} />
+					<Stack.Screen name="Slot Screen" component={SlotBookingScreen} options={{
+							title: 'Book your slot',
+							headerStyle: {
+								backgroundColor: '#222831'
+							},
+							headerTintColor: '#fff',
+							
+						}} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</ApplicationProvider>

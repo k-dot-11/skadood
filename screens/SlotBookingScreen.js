@@ -17,8 +17,8 @@ const SlotBookingScreen = ({ navigation, route }) => {
 	const [ date, setDate ] = useState(new Date());
 	const [ selectedIndex, setSelectedIndex ] = React.useState(new IndexPath(0));
 
-  const confirmBooking = () => {
-    fetch('https://ancient-wave-59600.herokuapp.com/create-event', {
+	const confirmBooking = () => {
+		fetch('https://ancient-wave-59600.herokuapp.com/create-event', {
 			method: 'POST',
 			mode: 'cors',
 			cache: 'no-cache',
@@ -28,27 +28,28 @@ const SlotBookingScreen = ({ navigation, route }) => {
 			},
 			redirect: 'follow',
 			referrerPolicy: 'no-referrer',
-			body: JSON.stringify({ email: route.params.email})
+			body: JSON.stringify({ email: route.params.email })
 		});
-  }
+	};
 
 	const CalendarIcon = (props) => <Text>Pick Date</Text>;
 	return (
-		<Layout style={styles.container}>
-			<Layout style={styles.doctorDetails}>
-				<Layout style={styles.avatarview} level="2">
+		<Layout level="4" style={styles.container}>
+			<Layout level="3" style={styles.doctorDetails}>
+				<Layout level="3" style={styles.avatarview} >
 					<Avatar
+						level="3"
 						style={styles.avatar}
 						size="giant"
 						source={{ uri: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png' }}
 					/>
 				</Layout>
 
-				<Layout style={styles.doctorview} level="1">
-					<Layout>
+				<Layout level="3" style={styles.doctorview} level="1">
+					<Layout level="3">
 						<Text category="h6">{route.params.name}</Text>
+						<Text category="s2">PhD FPS Games</Text>
 					</Layout>
-					
 				</Layout>
 			</Layout>
 			<Layout style={styles.datePicker}>
@@ -64,7 +65,7 @@ const SlotBookingScreen = ({ navigation, route }) => {
 			<View style={{ alignSelf: 'center', margin: 10 }}>
 				<Text category="h4">Slots Available</Text>
 			</View>
-			<Layout style={styles.slots}>
+			<Layout  style={styles.slots}>
 				<Drawer
 					style={styles.drawer}
 					selectedIndex={selectedIndex}
@@ -73,15 +74,17 @@ const SlotBookingScreen = ({ navigation, route }) => {
 					{data.map((slot) => <DrawerItem style={styles.slot} title={slot} />)}
 				</Drawer>
 			</Layout>
-			<View>
+			<Layout level="4">
 				{selectedIndex ? (
-					<Button style={styles.button} onPress = {confirmBooking}>CONFIRM BOOKING</Button>
+					<Button style={styles.button} onPress={confirmBooking}>
+						CONFIRM BOOKING
+					</Button>
 				) : (
 					<Button style={styles.button} disabled={true}>
 						CONFIRM BOOKING
 					</Button>
 				)}
-			</View>
+			</Layout>
 		</Layout>
 	);
 };
@@ -90,10 +93,7 @@ export default SlotBookingScreen;
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		backgroundColor: '#faf6ee'
-
-		//flexDirection: 'row',
+		flex: 1
 	},
 	doctorDetails: {
 		flexDirection: 'row',
@@ -110,8 +110,7 @@ const styles = StyleSheet.create({
 		margin: 8
 	},
 	avatarview: {
-		margin: 8,
-		backgroundColor: '#fff'
+		margin: 8
 	},
 	doctorview: {
 		width: '75%',
