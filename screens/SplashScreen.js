@@ -51,4 +51,3 @@ const SplashScreen = ({ navigation }) => {
 
 export default SplashScreen;
 
-const styles = StyleSheet.create({});

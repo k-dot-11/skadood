@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ThemeContext } from '../context/ThemeContext';
 
 const DoctorListScreen = ({ navigation }) => {
 	const [ currEmail, setCurrentEmail ] = useState('');
@@ -14,6 +15,8 @@ const DoctorListScreen = ({ navigation }) => {
 	const [ doctors, setDoctors ] = useState([]);
 	const [ toggle, setToggle ] = useState(false);
 	const [ toggle2, setToggle2 ] = useState(false);
+
+	const themeContext = React.useContext(ThemeContext);
 
 	const toggleFilter = () => {
 		setToggle(!toggle);
@@ -106,6 +109,13 @@ const DoctorListScreen = ({ navigation }) => {
 				<Layout style={{ marginTop: 15 }}>
 					<Button onPress={logout}>Log out</Button>
 				</Layout>
+				<Button onPress={themeContext.toggleTheme}>
+					{themeContext.theme === 'dark' ? (
+						<Icon name="brightness-7" size={20} />
+					) : (
+						<Icon name="brightness-3" size={20} />
+					)}
+				</Button>
 			</Layout>
 			<Layout style={{ display: 'flex', marginTop: 30, marginHorizontal: 30, flexDirection: 'row' }}>
 				<TouchableOpacity
