@@ -38,13 +38,13 @@ const SplashScreen = ({ navigation }) => {
 			source={{ uri: 'https://wallpaperaccess.com/full/1964825.jpg' }}
 			style={{ height: '100%', width: '100%' }}
 		>
-			<Layout style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', flex: 1 }}>
-				<Text category="h1" style={{ marginTop: 150 }}>
+			<View style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', flex: 1 }}>
+				<Text category="h1" style={{ marginTop: 150 , color:'black'}}>
 					Welcome to SKADOOD!
 				</Text>
 
-				{loading ? <Text>Loading</Text> : <Button style={{ marginTop: 50 }} onPress={navigateToSignUp}>Get Started</Button>}
-			</Layout>
+				{loading ? <Text >Loading</Text> : <Button style={{ marginTop: 50 }} onPress={navigateToSignUp}>Get Started</Button>}
+			</View>
 		</ImageBackground>
 	);
 };
