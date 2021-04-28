@@ -1,16 +1,30 @@
 import React from 'react';
-import { ActivityIndicator, FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import { Button, Avatar, Card, Text, Layout } from '@ui-kitten/components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import auth from '@react-native-firebase/auth';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const DoctorListScreen = ({ navigation }) => {
 	const [ currEmail, setCurrentEmail ] = useState('');
 	const [ loading, setLoading ] = useState(true);
 	const [ doctors, setDoctors ] = useState([]);
+	const [toggle,setToggle]=useState(false);
+	const [toggle2,setToggle2]=useState(false);
+
+	const toggleFilter=()=>{
+		setToggle(!toggle);
+		console.log(toggle);
+
+	}
+	const toggleFilter1=()=>{
+		setToggle2(!toggle2);
+		console.log(toggle2);
+
+	}
 
 	useEffect(() => {
 		const subscriber = firestore().collection('doctors').onSnapshot((querySnapshot) => {
@@ -31,7 +45,7 @@ const DoctorListScreen = ({ navigation }) => {
 	}, []);
 
 	const renderItems = ({ item }) => (
-		<Card
+		<TouchableOpacity
 			onPress={() => {
 				navigation.navigate('Slot Screen', {
 					name: item.name,
@@ -40,26 +54,26 @@ const DoctorListScreen = ({ navigation }) => {
 			}}
 			style={styles.card}
 		>
-			<View style={styles.doctorDetails}>
-				<View style={styles.avatarview}>
+			{/* <View style={styles.doctorDetails}>
+				<View style={styles.avatarview}> */}
 					<Avatar
 						style={styles.avatar}
 						size="giant"
 						source={{ uri: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png' }}
 					/>
-				</View>
+				
 
-				<View style={styles.doctorview}>
-					<View>
+				{/* <View style={styles.doctorview}> */}
+					<View style={{margin:10}}>
 						<Text category="h6">{item.name}</Text>
-						<Text category="h6">{item.email}</Text>
-					</View>
+						<Text category="h6" appearance="hint">{item.email}</Text>
+					
 				</View>
 				<View style={{ marginTop: 20 }}>
-					<Icon name="medical-services" size={30} color="#900" />
+					<Icon name="arrow-right" size={36} color="#000" />
 				</View>
-			</View>
-		</Card>
+		
+		</TouchableOpacity>
 	);
 
 	auth().onAuthStateChanged((user) => {
@@ -78,16 +92,53 @@ const DoctorListScreen = ({ navigation }) => {
 	};
 
 	return (
-		<View style={{ backgroundColor: '#d4e9fd', flex: 1 }}>
+		<View style={{ marginTop:StatusBar.currentHeight+5,
+			// backgroundColor: '#d4e9fd',
+		 flex: 1 }}>
 			<View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
 				<View style={{ display: 'flex', alignItems: 'center' }}>
-					<Text category="h3"> Doctors Available</Text>
-					<Text appearance="hint"> 15 Available today</Text>
+					<Text category="h4"  style={{alignSelf:"flex-start",marginTop:5}}> Doctors Available</Text>
+					<Text appearance="hint" style={{alignSelf:"flex-start",marginTop:5}}> 16 Available today</Text>
 				</View>
+				<View style={{marginTop:15}}>
 				<Button onPress={logout}>Log out</Button>
+				</View>
+			</View>
+			<View style={{display: 'flex', marginTop:30,marginHorizontal:30, flexDirection: 'row', }}>
+			<TouchableOpacity onPress={toggleFilter1}
+			
+			style={{
+			padding:20,
+			marginBottom:20,
+			marginRight:20,
+			backgroundColor:toggle2 ? "#2e0854" : "#fff",
+			opacity:0.8,
+		
+			borderRadius:30, }}
+		>
+			<Text style={{color:!toggle2 ? "#2e0854" : "#fff"}}>Currently Available</Text>
+		</TouchableOpacity>
+			<TouchableOpacity onPress={toggleFilter}
+			
+			
+			style={{
+			padding:20,
+			marginBottom:20,
+			backgroundColor:toggle ? "#2e0854" : "#fff",
+			opacity:0.8,
+		
+			
+			borderRadius:30, }}
+		>
+			<Text style={{color:
+				!toggle ? "#2e0854" : "#fff"}}>All Doctors</Text>
+		</TouchableOpacity>
+
 			</View>
 
-			<FlatList data={doctors} renderItem={renderItems} />
+			<FlatList data={doctors} renderItem={renderItems} contentContainerStyle={{padding:20,
+			marginBottom:20,
+			}}/>
 		</View>
 	);
 };
@@ -96,10 +147,20 @@ export default DoctorListScreen;
 
 const styles = StyleSheet.create({
 	card: {
-		marginTop: 10,
-		marginHorizontal: 20,
-		// height:150,
-		borderRadius: 15
+		flexDirection:"row",
+		padding:20,
+		marginBottom:20,
+		backgroundColor:"rgba(255,255,255,0.8)",
+		borderRadius:20, 
+		//elevation: 5,
+
+		// shadowColor:"#000", 
+		// shadowOffset:{
+		// 	width:0,
+		// 	height:10,
+		// },
+		// shadowOpacity:0.3,
+		// shadowRadius:20
 	},
 	doctorDetails: {
 		flexDirection: 'row',

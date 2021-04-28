@@ -19,7 +19,7 @@ function App() {
 					<Stack.Screen name="Login" component={LoginScreen} />
 					
 					<Stack.Screen name="Sign Up" component={AuthPage} />
-					<Stack.Screen name="Doctor Screen" component={DoctorListScreen} />
+					<Stack.Screen name="Doctor Screen" options={{title:" ",headerTransparent: true}} component={DoctorListScreen} />
 					<Stack.Screen name="Slot Screen" component={SlotBookingScreen} />
 				</Stack.Navigator>
 			</NavigationContainer>
